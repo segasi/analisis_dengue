@@ -253,3 +253,30 @@ bd %>%
   ggsave("03_graficas/numero_acumulado_casos_confirmados_dengue_semana_35.png", width = 13, height = 10, dpi = 200)
 
 
+
+
+### Gráfica de BARRAS del número de casos confirmados de dengue hasta la semana epidemiológica 35 de cada año, 2013-2019 ----
+
+bd %>% 
+  filter(semana == 35) %>% 
+  mutate(color_barras = ifelse(año == 2019, "sí", "no"),
+         etiqueta_años = ifelse(!año %in% c(2014, 2015, 2019) & semana == max(semana), año, ""),
+         etiqueta_2014 = ifelse(año == 2014 & semana == max(semana), año, ""),
+         etiqueta_2015 = ifelse(año == 2015 & semana == max(semana), año, ""),
+         etiqueta_2019 = ifelse(año == 2019 & semana == max(semana), año, "")) %>% 
+  ggplot(aes(año, casos_confirmados, fill = color_barras)) +
+  geom_col() +
+  geom_text(aes(label = comma(casos_confirmados)), color = "white", vjust = 1.6, fontface = "bold", size = 6, family = "Trebuchet MS Bold") +
+  scale_x_continuous(breaks = 2013:2019) +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_fill_manual(values = c("grey60", "salmon")) +
+  labs(title = str_wrap(str_to_upper("número de casos confirmados de dengue hasta la semana epidemiológica 35, 2013-2019"), width = 55),
+       x = "\n",
+       y = NULL,
+       caption = "@segasi / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
+  tema +
+  theme(panel.grid = element_blank(),
+        legend.position = "none",
+        axis.text.y = element_blank(),
+        axis.title.y = element_blank()) +
+  ggsave("03_graficas/numero_casos_confirmados_dengue_semana_35.png", width = 13, height = 10, dpi = 200)

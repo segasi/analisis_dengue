@@ -27,7 +27,7 @@ bd %>%
   labs(title = str_wrap(str_to_upper("número semanal de casos de dengue, 2013-2019"), width = 55),
        subtitle = "Casos confirmados hasta la semana epidemiológica 35",
        x = "\nSemana epidemiológica         \n",
-       y = "Casos confirmados\n",
+       y = "Núm. de casos confirmados\n",
        caption = "@segasi / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
   tema +
   theme(panel.grid = element_line(size = 0.3),
@@ -220,5 +220,36 @@ caption <-
 # Unir todo y graficar ----
 plot_grid(titulo, espacio_vacio, grafica, caption, ncol = 1, rel_heights = c(0.13, 0.02, 1, 0.08)) +
   ggsave("03_graficas/barras_numero_semanal_casos_confirmados_dengue_semana_35.png", width = 13.2, height = 10, dpi = 200)
+
+
+
+
+
+### Gráfica de LÍNEAS del número acumulado de casos confirmados de dengue hasta la semana epidemiológica 35 ----
+
+bd %>% 
+  mutate(color_lineas = ifelse(año == 2019, "sí", "no"),
+         etiqueta_años = ifelse(!año %in% c(2014, 2015, 2019) & semana == max(semana), año, ""),
+         etiqueta_2014 = ifelse(año == 2014 & semana == max(semana), año, ""),
+         etiqueta_2015 = ifelse(año == 2015 & semana == max(semana), año, ""),
+         etiqueta_2019 = ifelse(año == 2019 & semana == max(semana), año, "")) %>% 
+  ggplot(aes(semana, casos_confirmados, group = año, color = color_lineas)) +
+  geom_line(size = 1.5) +
+  geom_text(aes(label = etiqueta_años), color = "grey30", hjust = -0.1, fontface = "bold", size = 6) +
+  geom_text(aes(label = etiqueta_2015), color = "grey30", hjust = -0.1, vjust = -0.5, fontface = "bold", size = 6) +
+  geom_text(aes(label = etiqueta_2014), color = "grey30", hjust = -0.1, vjust = -0.2, fontface = "bold", size = 6) +
+  geom_text(aes(label = etiqueta_2019), color = "grey30", hjust = -0.1, vjust = 1, fontface = "bold", size = 6) +
+  scale_x_continuous(limits = c(1, 35.5), breaks = c(1, seq(5, 35, 5))) +
+  scale_y_continuous(label = comma, breaks = seq(0, 25000, 2500)) +
+  scale_color_manual(values = c("grey60", "salmon")) +
+  labs(title = str_wrap(str_to_upper("número acumulado de casos de dengue, 2013-2019"), width = 50),
+       subtitle = "Casos confirmados hasta la semana epidemiológica 35",
+       x = "\nSemana epidemiológica         \n",
+       y = "Núm. de casos confirmados\n",
+       caption = "@segasi / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
+  tema +
+  theme(panel.grid = element_line(size = 0.3),
+        legend.position = "none") +
+  ggsave("03_graficas/numero_acumulado_casos_confirmados_dengue_semana_35.png", width = 13, height = 10, dpi = 200)
 
 

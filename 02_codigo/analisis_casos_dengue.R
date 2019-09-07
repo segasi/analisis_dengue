@@ -28,8 +28,197 @@ bd %>%
        subtitle = "Casos confirmados hasta la semana epidemiológica 35",
        x = "\nSemana epidemiológica         \n",
        y = "Casos confirmados\n",
-       caption = "@segasi / Fuente: SS, Boletín epidemiológico y Panorama Epidemiológico de Dengue.") +
+       caption = "@segasi / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
   tema +
   theme(panel.grid = element_line(size = 0.3),
         legend.position = "none") +
   ggsave("03_graficas/numero_semanal_casos_confirmados_dengue_semana_35.png", width = 13.2, height = 10, dpi = 200)
+
+
+
+### Gráfica de BARRAS del número semanal de casos confirmados de dengue en 2019 vs. cada año entre 2013 y 2018 ----
+
+## Preparar datos ----
+
+# Calcular el número semanal de casos para cada año ----
+
+bd_num_semanal <- 
+  bd %>% 
+  group_by(año) %>% 
+  mutate(numero_semanal = casos_confirmados - lag(casos_confirmados),
+         numero_semanal = ifelse(is.na(numero_semanal), 0, numero_semanal), 
+         etiqueta_año = ifelse(semana == max(semana), año, ""),
+         color_lineas = ifelse(año == 2019, "sí", "no")) %>% 
+  ungroup() 
+
+# Generar un vector con los datos de 2019 ----
+
+num_semanal_2019 <- 
+  bd_num_semanal %>% 
+  filter(año == 2019) %>% 
+  select(numero_semanal) %>% 
+  pull()
+
+
+## Graficar ----
+
+# Definir tema para esta gráfica ----
+tema_bis <- 
+  tema +
+  theme(plot.title = element_markdown(size = 20, 
+                                      hjust = 0.5,
+                                      color = "grey40"),
+        panel.grid = element_line(linetype = 3))
+
+
+# 2013 vs. 2019 ----
+g_2013 <- 
+  bd_num_semanal %>%
+  filter(año == 2013) %>%
+  mutate(num_semanal_2019 = num_semanal_2019) %>% 
+  ggplot() +
+  geom_col(aes(semana, numero_semanal), fill = "grey70") +
+  geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
+  scale_x_continuous(limits = c(1, 35.5), breaks = c(1, seq(5, 35, 5))) +
+  scale_y_continuous(label = comma, 
+                     breaks = seq(0, 2000, 250), 
+                     limits = c(0, 2100)) +
+  labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2013</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
+       x = NULL,
+       y = "Núm. semanal\n") +
+  tema_bis +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+# 2014 vs. 2019 ----
+g_2014 <- 
+  bd_num_semanal %>% 
+  filter(año == 2014) %>% 
+  mutate(num_semanal_2019 = num_semanal_2019) %>% 
+  ggplot() +
+  geom_col(aes(semana, numero_semanal), fill = "grey70") +
+  geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
+  scale_x_continuous(limits = c(1, 35.5), breaks = c(1, seq(5, 35, 5))) +
+  scale_y_continuous(label = comma, 
+                     breaks = seq(0, 2000, 250), 
+                     limits = c(0, 2100)) +
+  labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2014</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
+       x = NULL,
+       y = NULL) +
+  tema_bis +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+
+# 2015 vs. 2019 ----
+g_2015 <- 
+  bd_num_semanal %>% 
+  filter(año == 2015) %>% 
+  mutate(num_semanal_2019 = num_semanal_2019) %>% 
+  ggplot() +
+  geom_col(aes(semana, numero_semanal), fill = "grey70") +
+  geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
+  scale_x_continuous(limits = c(1, 35.5), breaks = c(1, seq(5, 35, 5))) +
+  scale_y_continuous(label = comma, 
+                     breaks = seq(0, 2000, 250), 
+                     limits = c(0, 2100)) +
+  labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2015</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
+       x = NULL,
+       y = NULL) +
+  tema_bis +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+
+# 2016 vs. 2019 ----
+g_2016 <- 
+  bd_num_semanal %>% 
+  filter(año == 2016) %>% 
+  mutate(num_semanal_2019 = num_semanal_2019) %>% 
+  ggplot() +
+  geom_col(aes(semana, numero_semanal), fill = "grey70") +
+  geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
+  scale_x_continuous(limits = c(1, 35.5), breaks = c(1, seq(5, 35, 5))) +
+  scale_y_continuous(label = comma, 
+                     breaks = seq(0, 2000, 250), 
+                     limits = c(0, 2100)) +
+  labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2016</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
+       x = "\n",
+       y = "Núm. semanal\n") +
+  tema_bis
+
+
+# 2017 vs. 2019 ----
+g_2017 <- 
+  bd_num_semanal %>% 
+  filter(año == 2017) %>% 
+  mutate(num_semanal_2019 = num_semanal_2019) %>% 
+  ggplot() +
+  geom_col(aes(semana, numero_semanal), fill = "grey70") +
+  geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
+  scale_x_continuous(limits = c(1, 35.5), breaks = c(1, seq(5, 35, 5))) +
+  scale_y_continuous(label = comma, 
+                     breaks = seq(0, 2000, 250), 
+                     limits = c(0, 2100)) +
+  labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2017</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
+       x = "\n",
+       y = NULL) +
+  tema_bis +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+
+
+# 2018 vs. 2019 ----
+g_2018 <- 
+  bd_num_semanal %>% 
+  filter(año == 2018) %>% 
+  mutate(num_semanal_2019 = num_semanal_2019) %>% 
+  ggplot() +
+  geom_col(aes(semana, numero_semanal), fill = "grey70") +
+  geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
+  scale_x_continuous(limits = c(1, 35.5), breaks = c(1, seq(5, 35, 5))) +
+  scale_y_continuous(label = comma, 
+                     breaks = seq(0, 2000, 250), 
+                     limits = c(0, 2100)) +
+  labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2018</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
+       subtitle = NULL,
+       x = "\nSemana epidemiológica   ",
+       y = NULL) +
+  tema_bis +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+
+
+# Generar gráficas ----
+
+# Panel de arriba
+g_arriba <- 
+  plot_grid(g_2013, g_2014, g_2015, rel_widths = c(1.26, 1, 1), ncol = 3)
+
+# Panel de abajo
+g_abajo <- 
+  plot_grid(g_2016, g_2017, g_2018, rel_widths = c(1.26, 1, 1), ncol = 3)
+
+# Juntar páneles
+grafica <- 
+  plot_grid(g_arriba, g_abajo, nrow = 2, rel_heights = c(0.46, 0.54)) 
+
+# Definir título
+titulo <- 
+  ggdraw() + draw_label(str_to_upper("número semanal de casos confirmados de dengue\nen 2019 vs. cada año entre 2013 y 2018                   "), fontface = 'bold', size = 35, hjust = 0.5, fontfamily = "Trebuchet MS Bold", colour = "grey20")
+
+# Generar espacio blanco entre título y gráfica
+espacio_vacio <- 
+  ggdraw() + draw_label(str_to_upper(""), fontface = 'bold', size = 10)
+
+# Definir caption
+caption <- 
+  ggdraw() + draw_label("\n@segasi / Fuente: SS, Boletí Epidemiológico y Panorama Epidemiológico de Dengue.", fontface = 'bold', fontfamily = "Didact Gothic Regular", size = 15, hjust = 0.5, colour = "grey20")
+
+# Unir todo y graficar ----
+plot_grid(titulo, espacio_vacio, grafica, caption, ncol = 1, rel_heights = c(0.13, 0.02, 1, 0.08)) +
+  ggsave("03_graficas/barras_numero_semanal_casos_confirmados_dengue_semana_35.png", width = 13.2, height = 10, dpi = 200)
+
+

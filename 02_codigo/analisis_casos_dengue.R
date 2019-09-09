@@ -215,7 +215,7 @@ espacio_vacio <-
 
 # Definir caption
 caption <- 
-  ggdraw() + draw_label("\n@segasi / Fuente: SS, Boletí Epidemiológico y Panorama Epidemiológico de Dengue.", fontface = 'bold', fontfamily = "Didact Gothic Regular", size = 15, hjust = 0.5, colour = "grey20")
+  ggdraw() + draw_label("\n@segasi / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.                                                                        ", fontface = 'bold', fontfamily = "Didact Gothic Regular", size = 15, hjust = 0.5, colour = "grey20")
 
 # Unir todo y graficar ----
 plot_grid(titulo, espacio_vacio, grafica, caption, ncol = 1, rel_heights = c(0.13, 0.02, 1, 0.08)) +

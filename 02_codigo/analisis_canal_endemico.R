@@ -22,8 +22,8 @@ bd_canal %>%
   group_by(semana) %>% 
   summarise(media_geom = geometric.mean(ln_incidencia),
             des_est = sd(ln_incidencia), 
-            limite_sup = media_geom + (des_est*2.78/sqrt(5)),
-            limite_inf = media_geom - (des_est*2.78/sqrt(5))) %>% 
+            limite_sup = media_geom + ((des_est*2.78)/sqrt(5)),
+            limite_inf = media_geom - ((des_est*2.78)/sqrt(5))) %>% 
   ungroup() %>% 
   mutate(casos_esperados = exp(media_geom) - 1,
          superior = exp(limite_sup) - 1,
@@ -71,8 +71,8 @@ bd_canal %>%
   group_by(semana) %>% 
   summarise(media_geom = geometric.mean(ln_incidencia),
             des_est = sd(ln_incidencia), 
-            limite_sup = media_geom + (des_est*2.78/sqrt(5)),
-            limite_inf = media_geom - (des_est*2.78/sqrt(5))) %>% 
+            limite_sup = media_geom + ((des_est*2.78)/sqrt(5)),
+            limite_inf = media_geom - ((des_est*2.78)/sqrt(5))) %>% 
   ungroup() %>% 
   mutate(casos_esperados = exp(media_geom) - 1,
          superior = exp(limite_sup) - 1,

@@ -13,7 +13,7 @@ bd_canal <-
          numero_semanal = ifelse(is.na(numero_semanal), 0, numero_semanal)) %>% 
   ungroup()  
 
-# Gráfica del corredor endémico ----
+### Gráfica del CANAL ENDÉMICO ----
 bd_canal %>% 
   select(año, semana, numero_semanal) %>% 
   arrange(año, semana) %>% 
@@ -44,14 +44,14 @@ bd_canal %>%
   annotate(geom = "text", x = 35.5, y = 550, label = "Zona de", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 35.5, y = 470, label = "seguridad", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 35.5, y = 1050, label = "Zona de", family = "Didact Gothic Regular", size = 5) +
-  annotate(geom = "text", x = 35.5, y = 970, label = "alarma", family = "Didact Gothic Regular", size = 5) +
+  annotate(geom = "text", x = 35.5, y = 970, label = "alerta", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 33, y = 1850, label = "Zona", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 33, y = 1770, label = "epidémica", family = "Didact Gothic Regular", size = 5) +
   scale_x_continuous(expand = c(0, 0),
                      breaks = c(1, seq(5, 30, 5), 37),
                      limits = c(-0.02, 37.5)) +
   scale_y_continuous(breaks = seq(0, 2500, 500), labels = comma) +
-  labs(title = str_wrap("CORREDOR ENDÉMICO (2014-2018) E INCIDENCIA SEMANAL DE DENGUE (2019) EN MÉXICO", width = 55), 
+  labs(title = str_wrap("CANAL ENDÉMICO (2014-2018) E INCIDENCIA SEMANAL DE DENGUE (2019) EN MÉXICO", width = 55), 
        subtitle = "Calculados con el número de casos confirmados semanalmente hasta la semana epidemiológica 37 de cada año",
        x = "\nSemana  ",
        y = "Casos confirmados\n",
@@ -80,12 +80,12 @@ bd_canal %>%
   left_join(bd_canal %>% filter(año == 2019) %>% select(semana, numero_semanal), by = "semana") %>% 
   summarise(zona_exito = sum(numero_semanal <= inferior),
             zona_seguridad = sum(numero_semanal > inferior & numero_semanal <= casos_esperados),
-            zona_alarma = sum(numero_semanal > casos_esperados & numero_semanal <= superior),
+            zona_alerta = sum(numero_semanal > casos_esperados & numero_semanal <= superior),
             zona_epidemica = sum(numero_semanal > superior)) %>% 
   gather()
 
 
-# Gráfica del corredor endémico acumulado ----
+### Gráfica del CANAL ENDÉMICO acumulado ----
 
 bd_canal %>% 
   mutate(ln_casos_confirmados = log(casos_confirmados + 1)) %>% 
@@ -115,14 +115,14 @@ bd_canal %>%
   annotate(geom = "text", x = 35.5, y = 6400, label = "Zona de", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 35.5, y = 5600, label = "seguridad", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 35.6, y = 10500, label = "Zona de", family = "Didact Gothic Regular", size = 5) +
-  annotate(geom = "text", x = 35.6, y = 9700, label = "alarma", family = "Didact Gothic Regular", size = 5) +
+  annotate(geom = "text", x = 35.6, y = 9700, label = "alerta", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 33, y = 19000, label = "Zona", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 33, y = 18200, label = "epidémica", family = "Didact Gothic Regular", size = 5) +
   scale_x_continuous(expand = c(0, 0),
                      breaks = c(1, seq(5, 30, 5), 37),
                      limits = c(0, 37.5)) +
   scale_y_continuous(breaks = seq(0, 20000, 2500), labels = comma) +
-  labs(title = str_wrap("CORREDOR ENDÉMICO ACUMULADO (2014-2018) E INCIDENCIA ACUMULADA (2019) EN MÉXICO", width = 55), 
+  labs(title = str_wrap("CANAL ENDÉMICO ACUMULADO (2014-2018) E INCIDENCIA ACUMULADA (2019) EN MÉXICO", width = 55), 
        subtitle = "Calculados con el número acumulado de casos confirmados hasta la semana epidemiológica 37 de cada año",
        x = "\nSemana  ",
        y = "Número acumulado\n",
@@ -150,7 +150,7 @@ bd_canal %>%
   left_join(bd_canal %>% filter(año == 2019) %>% select(semana, casos_confirmados), by = "semana") %>%  
   mutate(zona_exito = casos_confirmados <= inferior,
          zona_seguridad = casos_confirmados > inferior & casos_confirmados <= casos_esperados,
-         zona_alarma = casos_confirmados > casos_esperados & casos_confirmados <= superior,
+         zona_alerta = casos_confirmados > casos_esperados & casos_confirmados <= superior,
          zona_epidemica = casos_confirmados > superior) %>% 
   select(-c(media_geom:limite_inf)) %>% 
   select(semana, inferior, casos_esperados, superior, casos_confirmados, everything()) %>% 

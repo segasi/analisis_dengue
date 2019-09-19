@@ -3,10 +3,9 @@ source("02_codigo/paquetes_setup_tema.R")
 
 ### Importar datos ----
 bd <- 
-  read_excel("01_datos/bd_casos_dengue.xlsx", 
-             range = "a1:f253")
+  read_excel("01_datos/bd_casos_dengue_semana_37.xlsx")
 
-### Gráfica de LÍNEAS del número semanal de casos de dengue, 2013-2019 hasta la semana epidemiológica 36 ----
+### Gráfica de LÍNEAS del número semanal de casos de dengue, 2013-2019 hasta la semana epidemiológica 37 ----
 
 bd %>% 
   # Calcular el número de casos confirmados nuevos semanales
@@ -22,18 +21,18 @@ bd %>%
   geom_line(size = 1.5) +
   geom_text(aes(label = etiqueta_años), color = "grey30", hjust = -0.1, fontface = "bold", size = 6) +
   geom_text(aes(label = etiqueta_2014), color = "grey30", hjust = -0.1, vjust = -0.5, fontface = "bold", size = 6) +
-  scale_x_continuous(limits = c(1, 36.5), breaks = c(1, seq(5, 36, 5))) +
-  scale_y_continuous(label = comma, breaks = seq(0, 2500, 250)) +
+  scale_x_continuous(limits = c(1, 37.5), breaks = c(1, seq(5, 37, 5), 37)) +
+  scale_y_continuous(label = comma, breaks = seq(0, 3000, 250)) +
   scale_color_manual(values = c("grey60", "salmon")) +
   labs(title = str_wrap(str_to_upper("número semanal de casos de dengue, 2013-2019"), width = 55),
-       subtitle = "Casos confirmados hasta la semana epidemiológica 36",
+       subtitle = "Casos confirmados hasta la semana epidemiológica 37",
        x = "\nSemana epidemiológica         \n",
        y = "Núm. de casos confirmados\n",
        caption = "@segasi / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
   tema +
   theme(panel.grid = element_line(size = 0.3),
         legend.position = "none") +
-  ggsave("03_graficas/numero_semanal_casos_confirmados_dengue_semana_36.png", width = 13.2, height = 10, dpi = 200)
+  ggsave("03_graficas/numero_semanal_casos_confirmados_dengue_semana_37.png", width = 13.2, height = 10, dpi = 200)
 
 
 
@@ -80,10 +79,10 @@ g_2013 <-
   ggplot() +
   geom_col(aes(semana, numero_semanal), fill = "grey70") +
   geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
-  scale_x_continuous(limits = c(1, 36.5), breaks = c(1, seq(5, 36, 5))) +
+  scale_x_continuous(limits = c(1, 37.5), breaks = c(1, seq(5, 30, 5), 37)) +
   scale_y_continuous(label = comma, 
-                     breaks = seq(0, 2500, 250), 
-                     limits = c(0, 2500)) +
+                     breaks = seq(0, 3000, 500), 
+                     limits = c(0, 3000)) +
   labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2013</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
        x = NULL,
        y = "Núm. semanal\n") +
@@ -99,10 +98,10 @@ g_2014 <-
   ggplot() +
   geom_col(aes(semana, numero_semanal), fill = "grey70") +
   geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
-  scale_x_continuous(limits = c(1, 36.5), breaks = c(1, seq(5, 36, 5))) +
+  scale_x_continuous(limits = c(1, 37.5), breaks = c(1, seq(5, 30, 5), 37)) +
   scale_y_continuous(label = comma, 
-                     breaks = seq(0, 2500, 250), 
-                     limits = c(0, 2500)) +
+                     breaks = seq(0, 3000, 500), 
+                     limits = c(0, 3000)) +
   labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2014</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
        x = NULL,
        y = NULL) +
@@ -120,10 +119,10 @@ g_2015 <-
   ggplot() +
   geom_col(aes(semana, numero_semanal), fill = "grey70") +
   geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
-  scale_x_continuous(limits = c(1, 36.5), breaks = c(1, seq(5, 36, 5))) +
+  scale_x_continuous(limits = c(1, 37.5), breaks = c(1, seq(5, 30, 5), 37)) +
   scale_y_continuous(label = comma, 
-                     breaks = seq(0, 2500, 250), 
-                     limits = c(0, 2500)) +
+                     breaks = seq(0, 3000, 500), 
+                     limits = c(0, 3000)) +
   labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2015</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
        x = NULL,
        y = NULL) +
@@ -141,10 +140,10 @@ g_2016 <-
   ggplot() +
   geom_col(aes(semana, numero_semanal), fill = "grey70") +
   geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
-  scale_x_continuous(limits = c(1, 36.5), breaks = c(1, seq(5, 36, 5))) +
+  scale_x_continuous(limits = c(1, 37.5), breaks = c(1, seq(5, 30, 5), 37)) +
   scale_y_continuous(label = comma, 
-                     breaks = seq(0, 2500, 250), 
-                     limits = c(0, 2500)) +
+                     breaks = seq(0, 3000, 500), 
+                     limits = c(0, 3000)) +
   labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2016</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
        x = "\n",
        y = "Núm. semanal\n") +
@@ -159,10 +158,10 @@ g_2017 <-
   ggplot() +
   geom_col(aes(semana, numero_semanal), fill = "grey70") +
   geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
-  scale_x_continuous(limits = c(1, 36.5), breaks = c(1, seq(5, 36, 5))) +
+  scale_x_continuous(limits = c(1, 37.5), breaks = c(1, seq(5, 30, 5), 37)) +
   scale_y_continuous(label = comma, 
-                     breaks = seq(0, 2500, 250), 
-                     limits = c(0, 2500)) +
+                     breaks = seq(0, 3000, 500), 
+                     limits = c(0, 3000)) +
   labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2017</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
        x = "\n",
        y = NULL) +
@@ -179,10 +178,10 @@ g_2018 <-
   ggplot() +
   geom_col(aes(semana, numero_semanal), fill = "grey70") +
   geom_col(aes(semana, num_semanal_2019), fill = "salmon", alpha = 0.5) +
-  scale_x_continuous(limits = c(1, 36.5), breaks = c(1, seq(5, 36, 5))) +
+  scale_x_continuous(limits = c(1, 37.5), breaks = c(1, seq(5, 30, 5), 37)) +
   scale_y_continuous(label = comma, 
-                     breaks = seq(0, 2500, 250), 
-                     limits = c(0, 2500)) +
+                     breaks = seq(0, 3000, 500), 
+                     limits = c(0, 3000)) +
   labs(title = "<span style='color:#8c8c8c; padding-right: 20px'>2018</span> <span style='color:#4d4d4d'>vs.</span> <span style='color:#FA8072'>2019</span>",
        subtitle = NULL,
        x = "\nSemana epidemiológica   ",
@@ -208,7 +207,7 @@ grafica <-
 
 # Definir título
 titulo <- 
-  ggdraw() + draw_label(str_to_upper("número semanal de casos confirmados de dengue\nen 2019 vs. cada año entre 2013 y 2018                   "), fontface = 'bold', size = 36, hjust = 0.5, fontfamily = "Trebuchet MS Bold", colour = "grey20")
+  ggdraw() + draw_label(str_to_upper("número semanal de casos confirmados de dengue\nen 2019 vs. cada año entre 2013 y 2018                   "), fontface = 'bold', size = 37, hjust = 0.5, fontfamily = "Trebuchet MS Bold", colour = "grey20")
 
 # Generar espacio blanco entre título y gráfica
 espacio_vacio <- 
@@ -220,13 +219,13 @@ caption <-
 
 # Unir todo y graficar ----
 plot_grid(titulo, espacio_vacio, grafica, caption, ncol = 1, rel_heights = c(0.13, 0.02, 1, 0.08)) +
-  ggsave("03_graficas/barras_numero_semanal_casos_confirmados_dengue_semana_36.png", width = 13.2, height = 10, dpi = 200)
+  ggsave("03_graficas/barras_numero_semanal_casos_confirmados_dengue_semana_37.png", width = 13.5, height = 10, dpi = 200)
 
 
 
 
 
-### Gráfica de LÍNEAS del número acumulado de casos confirmados de dengue hasta la semana epidemiológica 36 ----
+### Gráfica de LÍNEAS del número acumulado de casos confirmados de dengue hasta la semana epidemiológica 37 ----
 
 bd %>% 
   mutate(color_lineas = ifelse(año == 2019, "sí", "no"),
@@ -246,26 +245,26 @@ bd %>%
   geom_text(aes(label = etiqueta_2019), color = "grey30", hjust = -0.1, 
             vjust = -0.2,
             fontface = "bold", size = 6) +
-  scale_x_continuous(limits = c(1, 36.5), breaks = c(1, seq(5, 36, 5))) +
+  scale_x_continuous(limits = c(1, 37.5), breaks = c(1, seq(5, 30, 5), 37)) +
   scale_y_continuous(label = comma, breaks = seq(0, 25000, 2500)) +
   scale_color_manual(values = c("grey60", "salmon")) +
   labs(title = str_wrap(str_to_upper("número acumulado de casos de dengue, 2013-2019"), width = 50),
-       subtitle = "Casos confirmados hasta la semana epidemiológica 36",
+       subtitle = "Casos confirmados hasta la semana epidemiológica 37",
        x = "\nSemana epidemiológica         \n",
        y = "Núm. de casos confirmados\n",
        caption = "@segasi / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
   tema +
   theme(panel.grid = element_line(size = 0.3),
         legend.position = "none") +
-  ggsave("03_graficas/numero_acumulado_casos_confirmados_dengue_semana_36.png", width = 13, height = 10, dpi = 200)
+  ggsave("03_graficas/numero_acumulado_casos_confirmados_dengue_semana_37.png", width = 13, height = 10, dpi = 200)
 
 
 
 
-### Gráfica de BARRAS del número de casos confirmados de dengue hasta la semana epidemiológica 36 de cada año, 2013-2019 ----
+### Gráfica de BARRAS del número de casos confirmados de dengue hasta la semana epidemiológica 37 de cada año, 2013-2019 ----
 
 bd %>% 
-  filter(semana == 36) %>% 
+  filter(semana == 37) %>% 
   mutate(color_barras = ifelse(año == 2019, "sí", "no"),
          etiqueta_años = ifelse(!año %in% c(2014, 2015, 2019) & semana == max(semana), año, ""),
          etiqueta_2014 = ifelse(año == 2014 & semana == max(semana), año, ""),
@@ -277,7 +276,7 @@ bd %>%
   scale_x_continuous(breaks = 2013:2019) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_fill_manual(values = c("grey60", "salmon")) +
-  labs(title = str_wrap(str_to_upper("número de casos confirmados de dengue hasta la semana epidemiológica 36, 2013-2019"), width = 55),
+  labs(title = str_wrap(str_to_upper("número de casos confirmados de dengue hasta la semana epidemiológica 37, 2013-2019"), width = 55),
        x = "\n",
        y = NULL,
        caption = "@segasi / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
@@ -286,4 +285,4 @@ bd %>%
         legend.position = "none",
         axis.text.y = element_blank(),
         axis.title.y = element_blank()) +
-  ggsave("03_graficas/numero_casos_confirmados_dengue_semana_36.png", width = 13, height = 10, dpi = 200)
+  ggsave("03_graficas/numero_casos_confirmados_dengue_semana_37.png", width = 13, height = 10, dpi = 200)

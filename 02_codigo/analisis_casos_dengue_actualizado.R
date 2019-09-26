@@ -237,10 +237,10 @@ bd %>%
   geom_line(size = 1.5) +
   geom_text(aes(label = etiqueta_años), color = "grey30", hjust = -0.1, fontface = "bold", size = 6) +
   geom_text(aes(label = etiqueta_2015), color = "grey30", hjust = -0.1, 
-            # vjust = 0.01,
+            vjust = -0.1,
             fontface = "bold", size = 6) +
   geom_text(aes(label = etiqueta_2014), color = "grey30", hjust = -0.1, 
-            vjust = 0.9,
+            vjust = 1,
             fontface = "bold", size = 6) +
   geom_text(aes(label = etiqueta_2019), color = "grey30", hjust = -0.1, 
             vjust = -0.2,

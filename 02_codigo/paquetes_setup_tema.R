@@ -1,6 +1,6 @@
 ### Paquetes ----
 library(pacman)
-p_load(cowplot, ggtext, janitor, lubridate, readxl, scales, tidyverse, treemapify)
+p_load(cowplot, ggtext, janitor, lubridate, psych, readxl, scales, tidyverse, treemapify)
 
 ### Setup general ----
 Sys.setlocale("LC_ALL", "es_ES.UTF-8") 

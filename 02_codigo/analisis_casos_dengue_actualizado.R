@@ -246,7 +246,7 @@ bd %>%
             vjust = -0.2,
             fontface = "bold", size = 6) +
   scale_x_continuous(limits = c(1, 38.5), breaks = c(1, seq(5, 30, 5), 38)) +
-  scale_y_continuous(label = comma, breaks = seq(0, 25000, 2500)) +
+  scale_y_continuous(label = comma, breaks = seq(0, 50000, 2500)) +
   scale_color_manual(values = c("grey60", "salmon")) +
   labs(title = str_wrap(str_to_upper("número acumulado de casos de dengue, 2013-2019"), width = 50),
        subtitle = "Casos confirmados hasta la semana epidemiológica 38",

@@ -3,7 +3,7 @@ source("02_codigo/paquetes_setup_tema.R")
 
 ### Importar datos ----
 bd <- 
-  read_excel("01_datos/bd_casos_dengue_semana_40.xlsx")
+  read_excel("01_datos/bd_casos_dengue_semana_41.xlsx")
 
 ### Calcular el número de casos confirmados nuevos semanales ---
 bd_canal <- 
@@ -29,16 +29,16 @@ bd_canal %>%
          superior = exp(limite_sup) - 1,
          inferior = exp(limite_inf) - 1) %>% 
   ggplot() +
-  annotate(geom = "rect", xmin = 1, xmax = 40, ymin = 0, ymax = 2750, fill = "salmon") +
+  annotate(geom = "rect", xmin = 1, xmax = 41, ymin = 0, ymax = 2750, fill = "salmon") +
   geom_area(aes(semana, superior), fill = "#fed976") +
   geom_area(aes(semana, casos_esperados), fill = "#74c476") +
   geom_area(aes(semana, inferior), fill = "#6baed6") +
-  geom_vline(xintercept = c(1, seq(5, 35, 5), 40), color = "white", linetype = 3, size = 0.4) +
+  geom_vline(xintercept = c(1, seq(5, 35, 5), 41), color = "white", linetype = 3, size = 0.4) +
   geom_hline(yintercept =  seq(0, 2750, 250), color = "white", linetype = 3, size = 0.4) +
   geom_line(data = bd_canal %>% filter(año == 2019), aes(semana, numero_semanal), 
-            color = "grey40",
+            color = "grey41",
             size = 1) +
-  geom_point(data = bd_canal %>% filter(año == 2019), aes(semana, numero_semanal), color = "grey40") +
+  geom_point(data = bd_canal %>% filter(año == 2019), aes(semana, numero_semanal), color = "grey41") +
   annotate(geom = "text", x = 37, y = 150, label = "Zona de", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 37, y = 80, label = "éxito", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 37, y = 550, label = "Zona de", family = "Didact Gothic Regular", size = 5) +
@@ -48,11 +48,11 @@ bd_canal %>%
   annotate(geom = "text", x = 32.5, y = 1900, label = "Zona", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 32.5, y = 1820, label = "epidémica", family = "Didact Gothic Regular", size = 5) +
   scale_x_continuous(expand = c(0, 0),
-                     breaks = c(1, seq(5, 35, 5), 40),
-                     limits = c(-0.02, 40.5)) +
+                     breaks = c(1, seq(5, 35, 5), 41),
+                     limits = c(-0.02, 41.5)) +
   scale_y_continuous(breaks = seq(0, 2750, 250), labels = comma) +
   labs(title = str_wrap("CANAL ENDÉMICO (2014-2018) E INCIDENCIA SEMANAL DE DENGUE (2019) EN MÉXICO", width = 55), 
-       subtitle = "Calculados con el número de casos confirmados semanalmente hasta la semana epidemiológica 40 de cada año",
+       subtitle = "Calculados con el número de casos confirmados semanalmente hasta la semana epidemiológica 41 de cada año",
        x = "\nSemana  ",
        y = "Casos confirmados\n",
        caption = "@segasi y @jorgeacast / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
@@ -60,7 +60,7 @@ bd_canal %>%
   theme(panel.background = element_rect(fill = "transparent", color = "transparent"),
         panel.grid = element_line(color = "grey20", linetype = 3, size = 0.4),
         axis.ticks = element_line(color = "grey20", linetype = 3, size = 0.4)) +
-  ggsave("03_graficas/corredor_endemico_casos_confirmados_dengue_semana_40.png", width = 13.2, height = 10, dpi = 200)
+  ggsave("03_graficas/corredor_endemico_casos_confirmados_dengue_semana_41.png", width = 13.2, height = 10, dpi = 200)
 
 ### Cálculo del número de semanas en cada zona ----
 bd_canal %>% 
@@ -100,16 +100,16 @@ bd_canal %>%
          superior = exp(limite_sup) - 1,
          inferior = exp(limite_inf) - 1) %>% 
   ggplot() +
-  annotate(geom = "rect", xmin = 1, xmax = 40, ymin = 0, ymax = 25000, fill = "salmon") +
+  annotate(geom = "rect", xmin = 1, xmax = 41, ymin = 0, ymax = 27500, fill = "salmon") +
   geom_area(aes(semana, superior), fill = "#fed976") +
   geom_area(aes(semana, casos_esperados), fill = "#74c476") +
   geom_area(aes(semana, inferior), fill = "#6baed6") +
-  geom_vline(xintercept = c(1, seq(5, 35, 5), 40), color = "white", linetype = 3, size = 0.4) +
-  geom_hline(yintercept =  seq(0, 25000, 2500), color = "white", linetype = 3, size = 0.4) +
+  geom_vline(xintercept = c(1, seq(5, 35, 5), 41), color = "white", linetype = 3, size = 0.4) +
+  geom_hline(yintercept =  seq(0, 27500, 2500), color = "white", linetype = 3, size = 0.4) +
   geom_line(data = bd_canal %>% filter(año == 2019), aes(semana, casos_confirmados), 
-            color = "grey40",
+            color = "grey41",
             size = 1) +
-  geom_point(data = bd_canal %>% filter(año == 2019), aes(semana, casos_confirmados), color = "grey40") +
+  geom_point(data = bd_canal %>% filter(año == 2019), aes(semana, casos_confirmados), color = "grey41") +
   annotate(geom = "text", x = 37, y = 1500, label = "Zona de", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 37, y = 800, label = "éxito", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 37, y = 8000, label = "Zona de", family = "Didact Gothic Regular", size = 5) +
@@ -119,11 +119,11 @@ bd_canal %>%
   annotate(geom = "text", x = 32.5, y = 19000, label = "Zona", family = "Didact Gothic Regular", size = 5) +
   annotate(geom = "text", x = 32.5, y = 18200, label = "epidémica", family = "Didact Gothic Regular", size = 5) +
   scale_x_continuous(expand = c(0, 0),
-                     breaks = c(1, seq(5, 35, 5), 40),
-                     limits = c(0, 40.5)) +
-  scale_y_continuous(breaks = seq(0, 25000, 2500), labels = comma) +
+                     breaks = c(1, seq(5, 35, 5), 41),
+                     limits = c(0, 41.5)) +
+  scale_y_continuous(breaks = seq(0, 27500, 2500), labels = comma) +
   labs(title = str_wrap("CANAL ENDÉMICO ACUMULADO (2014-2018) E INCIDENCIA ACUMULADA (2019) EN MÉXICO", width = 55), 
-       subtitle = "Calculados con el número acumulado de casos confirmados hasta la semana epidemiológica 40 de cada año",
+       subtitle = "Calculados con el número acumulado de casos confirmados hasta la semana epidemiológica 41 de cada año",
        x = "\nSemana  ",
        y = "Número acumulado\n",
        caption = "@segasi y @jorgeacast / Fuente: SS, Boletín Epidemiológico y Panorama Epidemiológico de Dengue.") +
@@ -131,7 +131,7 @@ bd_canal %>%
   theme(panel.background = element_rect(fill = "transparent", color = "transparent"),
         panel.grid = element_line(color = "grey20", linetype = 3, size = 0.4),
         axis.ticks = element_line(color = "grey20", linetype = 3, size = 0.4)) +
-  ggsave("03_graficas/corredor_endemico_acumulado_casos_confirmados_dengue_semana_40.png", width = 13.2, height = 10, dpi = 200)
+  ggsave("03_graficas/corredor_endemico_acumulado_casos_confirmados_dengue_semana_41.png", width = 13.2, height = 10, dpi = 200)
 
 
 ### Identificar desde qué semana la incidencia de dengue se encuentra en la zona de alerta ----
